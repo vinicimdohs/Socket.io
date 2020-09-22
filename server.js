@@ -15,8 +15,14 @@ app.use('/',(req,res)=>{
     res.render('index.html');
 });
 
+let messages = [];
+
 io.on('connection',socket => {
-console.log(`Socket conectado: ${socket.id}`)
+    console.log(`Socket conectado: ${socket.id}`);
+    socket.on('sendMessage', data =>{
+        messages.push(data);
+    })
+
 });
 
 server.listen(3000);
